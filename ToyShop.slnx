@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ToyShop.App/ToyShop.App.csproj" />
+  <Project Path="ToyShop.Core/ToyShop.Core.csproj" />
+</Solution>
