@@ -4,9 +4,12 @@ using System.Text;
 
 namespace ToyShop.Core.Models
 {
+    /// <summary>
+    /// Класс-модель продукции
+    /// </summary>
     public class Product
     {
-        public int Id_prod { get; set; }
+        public int Id { get; set; }
         public string Name_prod { get; set; }
         public string Article { get; set; }
         public int Barcode { get; set; }
@@ -15,11 +18,11 @@ namespace ToyShop.Core.Models
         public int AgeRestriction { get; set; }
 
         public Brand Brand { get; set; } = new();
-        public int Id_brand { get => Brand.Id_br; }
+        public int Id_brand { get => Brand.Id; }
         public Category Category { get; set; } = new();
-        public int Id_category { get => Category.Id_cat; }
+        public int Id_category { get => Category.Id; }
         public Supplier Supplier { get; set; } = new();
-        public int Id_suppl { get => Supplier.Id_sup; }
+        public int Id_suppl { get => Supplier.Id; }
 
         public Product(string name, string article, int barcode, decimal price, int quantity, int ageRestriction)
         {

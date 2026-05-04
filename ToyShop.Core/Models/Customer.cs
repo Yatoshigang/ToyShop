@@ -5,9 +5,12 @@ using System.Text;
 
 namespace ToyShop.Core.Models
 {
+    /// <summary>
+    /// Класс-модель клиентов
+    /// </summary>
     public class Customer
     {
-        public int Id_cust {  get; set; }
+        public int Id {  get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

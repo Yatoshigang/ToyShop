@@ -7,10 +7,13 @@ using System.Text;
 
 namespace ToyShop.Core.Models
 {
+    /// <summary>
+    /// Класс-модель категорий
+    /// </summary>
     [Index(nameof(Name_cat), IsUnique = true)]
     public class Category
     {
-        public int Id_cat { get; set; }
+        public int Id { get; set; }
         [Required]
         public string Name_cat {  get; set; }
 

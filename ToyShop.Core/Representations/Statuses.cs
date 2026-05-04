@@ -4,6 +4,9 @@ using System.Text;
 
 namespace ToyShop.Core.Representations
 {
+    /// <summary>
+    /// Перечисление статусов заказа
+    /// </summary>
     [Flags]
     public enum Statuses
     {

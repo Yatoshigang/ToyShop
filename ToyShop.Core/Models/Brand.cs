@@ -4,9 +4,13 @@ using System.Text;
 
 namespace ToyShop.Core.Models
 {
-    internal class Brand
+    /// <summary>
+    /// Класс-модель брендов
+    /// </summary>
+    public class Brand
     {
-        public int Id_br { get; set; }
+
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Country { get; set; }
         public DateOnly DateOfOpen { get; set; }

@@ -4,9 +4,12 @@ using System.Text;
 
 namespace ToyShop.Core.Models
 {
+    /// <summary>
+    /// Класс-модель поставщиков
+    /// </summary>
     public class Supplier
     {
-        public int Id_sup { get; set; }
+        public int Id { get; set; }
         public string Name_sup { get; set; }
         public string Country_sup { get; set; }
         public string Number { get; set; }

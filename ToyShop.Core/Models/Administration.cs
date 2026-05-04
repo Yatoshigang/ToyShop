@@ -1,18 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace ToyShop.Core.Models
 {
+    /// <summary>
+    /// Класс-модель администраторов
+    /// </summary>
     [Index(nameof(Email), IsUnique = true)]
     [Index(nameof(Login), IsUnique = true)]
-    internal class Administration
+    public class Administration
     {
-        public int Id_adm { get; set; }
+        public int Id { get; set; }
         public User User { get; set; } = new();
-        public int Id_adm_user { get => User.Id_user; }
+        public int Id_adm_user { get => User.Id; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
