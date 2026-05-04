@@ -4,9 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using ToyShop.App.Views.AuthorizationComponents;
+using ToyShop.App.Views;
 
 namespace ToyShop.App.ViewModels.AuthorizationViewModels
 {
+    /// <summary>
+    /// Класс логики для страницы <see cref="RegistrationPage">RegistrationPage</see> для представления <see cref="AuthorizationWindow">AuthorizationWindow</see>
+    /// </summary>
     public partial class RegistrationVM : ObservableObject
     {
         [ObservableProperty]

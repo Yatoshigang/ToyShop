@@ -14,10 +14,18 @@ using ToyShop.App.ViewModels.MainViewModels;
 namespace ToyShop.App.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Класс для взаимодействия с окном MainWindow.xaml
     /// </summary>
+    /// <remarks>
+    /// Создается посредством создания экземпляра модели представления MainWindowVM
+    /// </remarks>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vm">Представляет экземпляр <see cref="MainWindowVM">модели представления</see></param>
+        /// 
         public MainWindow(MainWindowVM vm)
         {
             InitializeComponent();

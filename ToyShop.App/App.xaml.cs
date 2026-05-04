@@ -11,7 +11,13 @@ namespace ToyShop.App
     /// </summary>
     public partial class App : Application
     {
+        /// <value>
+        /// Свойство для контекста базы данных
+        /// </value>
         public static ShopContext ctx = new();
+        /// <value>
+        /// Свойство для сохранения экземпляра вошедшего пользователя
+        /// </value>
         public static User user = null!;
     }
 

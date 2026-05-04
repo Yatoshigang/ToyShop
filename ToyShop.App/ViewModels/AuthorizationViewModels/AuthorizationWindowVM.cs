@@ -4,9 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using ToyShop.App.Views.AuthorizationComponents;
+using ToyShop.App.Views;
 
 namespace ToyShop.App.ViewModels.AuthorizationViewModels
 {
+    /// <summary>
+    /// Класс для логики представления <see cref="AuthorizationWindow">AuthorizationWindow</see> 
+    /// </summary>
     public partial class AuthorizationWindowVM : ObservableObject
     {
         [ObservableProperty]

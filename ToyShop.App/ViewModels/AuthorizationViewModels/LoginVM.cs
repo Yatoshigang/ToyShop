@@ -8,9 +8,12 @@ using System.Windows;
 using ToyShop.App.ViewModels.MainViewModels;
 using ToyShop.App.Views;
 using ToyShop.Core.Models;
-
+using ToyShop.App.Views.AuthorizationComponents;
 namespace ToyShop.App.ViewModels.AuthorizationViewModels
 {
+    /// <summary>
+    /// Класс логики страницы <see cref="LoginPage">LoginPage</see> для окна <see cref="AuthorizationWindow">AuthorizationWindow</see>
+    /// </summary>
     public partial class LoginVM : ObservableObject
     {
         [ObservableProperty]

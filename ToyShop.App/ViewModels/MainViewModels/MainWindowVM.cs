@@ -9,10 +9,19 @@ using ToyShop.Core.Models;
 
 namespace ToyShop.App.ViewModels.MainViewModels
 {
+    /// <summary>
+    /// Класс для логики представления <see cref="MainWindow">MainWindow</see>
+    /// </summary>
     public partial class MainWindowVM : ObservableObject
     {
         Window _window;
         string _windowTitle;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user">Экземпляр класса <see cref="User">User</see></param>
+        /// <param name="userIsAdmin">Параметр для проверки пользователя на права администратора</param>
         
         public MainWindowVM(User user, bool userIsAdmin)
         {
