@@ -10,16 +10,34 @@ namespace ToyShop.Core.Context
     {
 
         public DbSet<Administration> Administrations { get; set; }
-        public DbSet<Brand> brands { get; set; }
-        public DbSet<Category> categories { get; set; }
-        public DbSet<Customer> customers { get; set; }
-        public DbSet<Product> products { get; set; }
-        public DbSet<Sale> sales { get; set; }
-        public DbSet<Supplier> suppliers { get; set; }
-        public DbSet<User> users { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Sale> Sales { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public ShopContext()
         {
+            Database.EnsureCreated();
+
+            if (!Users.Any())
+            {
+                Users.Add(new User("Spenser", "Tom", "Lil", "Tom@gmail.com", "LilTom", "qwerty"));
+                Users.Add(new User("Lake", "Anna", "Villa", "Anna@gmail.com", "Admin", "qwerty"));
+                SaveChanges();
+            }
+            if (!Suppliers.Any())
+            {
+                Suppliers.Add( new Supplier("ООО \"Марка\"", "Россия", "89803934959") );
+                SaveChanges();
+            }
+            if (!Administrations.Any())
+            {
+                Administrations.Add(new Administration("Lake", "Anna", "Villa", "Anna@gmail.com", "Admin", "qwerty"));
+                SaveChanges();
+            }
             
         }
 
