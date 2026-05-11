@@ -1,8 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace ToyShop.App.ViewModels.MainViewModels
@@ -15,24 +13,24 @@ namespace ToyShop.App.ViewModels.MainViewModels
         /// <summary>
         /// 
         /// </summary>
-        public string Content { get; }
+        public string Content { get; private set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public Page DependentPage { get; }
+        public ICommand Command { get; private set; }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="content"></param>
-        /// <param name="dependentPage"></param>
-        public InStartViewButton(string content, Page dependentPage)
+        /// <param name="command"></param>
+        public InStartViewButton(string content)
         {
             Content = content;
-            DependentPage = dependentPage;
         }
 
-        
+
+
     }
 }

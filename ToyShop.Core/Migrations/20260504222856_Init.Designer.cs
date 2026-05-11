@@ -12,7 +12,7 @@ using ToyShop.Core.Context;
 namespace ToyShop.Core.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20260507210917_Init")]
+    [Migration("20260504222856_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -98,7 +98,7 @@ namespace ToyShop.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("brands");
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Category", b =>
@@ -118,7 +118,7 @@ namespace ToyShop.Core.Migrations
                     b.HasIndex("Name_cat")
                         .IsUnique();
 
-                    b.ToTable("Categories");
+                    b.ToTable("categories");
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Customer", b =>
@@ -157,7 +157,7 @@ namespace ToyShop.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("customers");
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Product", b =>
@@ -205,7 +205,7 @@ namespace ToyShop.Core.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Products");
+                    b.ToTable("products");
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Sale", b =>
@@ -245,7 +245,7 @@ namespace ToyShop.Core.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Sales");
+                    b.ToTable("sales");
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Supplier", b =>
@@ -270,7 +270,7 @@ namespace ToyShop.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Suppliers");
+                    b.ToTable("suppliers");
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.User", b =>
@@ -307,7 +307,7 @@ namespace ToyShop.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("users");
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Administration", b =>

@@ -1,13 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using ToyShop.App.Views;
-using ToyShop.App.Views.MainComponents;
 using ToyShop.Core.Models;
 
 namespace ToyShop.App.ViewModels.MainViewModels
@@ -17,8 +14,6 @@ namespace ToyShop.App.ViewModels.MainViewModels
     /// </summary>
     public partial class MainWindowVM : ObservableObject
     {
-        Window _window;
-        List<InStartViewButton> _commonStartViewButtons;
         public List<InStartViewButton> InStartViewButtons { get; private set; }
 
         [ObservableProperty]
@@ -32,29 +27,21 @@ namespace ToyShop.App.ViewModels.MainViewModels
         
         public MainWindowVM(User user, bool userIsAdmin)
         {
-            _window = App.Current.MainWindow;
-
-            _commonStartViewButtons = new List<InStartViewButton>()
-            {
-                new InStartViewButton("Профиль", new ProfilePage()),
-                new InStartViewButton("Категории", new CategoriesPage()),
-                new InStartViewButton("Бренд", new BrandsPage()),
-                new InStartViewButton("Товары", new ProductsPage())
-            };
-            InStartViewButtons = _commonStartViewButtons;
-            _frameContent = InStartViewButtons.First().DependentPage;
+            InStartViewButtons = new();
+            
 
             App.user = user;
             App.Current.MainWindow = new MainWindow(this);
-            App.Current.MainWindow.Left = _window.Left;
-            App.Current.MainWindow.Top = _window.Top;
-            App.Current.MainWindow.Title = OnStartAdminValidator(in user, in userIsAdmin);
-            _window.Close();
+            App.Current.MainWindow.Title = AdminValidator(in user, in userIsAdmin);
+
+
             App.Current.MainWindow.Show();
+            
+            
         }
 
 
-        string OnStartAdminValidator(in User user, in bool userIsAdmin)
+        string AdminValidator(in User user, in bool userIsAdmin)
         {
             if (userIsAdmin)
             {
@@ -66,7 +53,7 @@ namespace ToyShop.App.ViewModels.MainViewModels
             }
         }
 
-        void OnStartGenerateButtonsPool(in bool userIsAdmin)
+        void CreateInStartButtonsPool(in bool userIsAdmin)
         {
             if (userIsAdmin)
             {
@@ -78,26 +65,10 @@ namespace ToyShop.App.ViewModels.MainViewModels
             }
         }
 
-        [RelayCommand]
-        void GoToComponent(Page page)
+        void GoToComponent<T>()
         {
-            if (FrameContent == page)
-            {
-                return;
-            }
-            FrameContent = page;
+            
         }
 
-        [RelayCommand]
-        void LogOut()
-        {
-            _window = App.Current.MainWindow;
-            App.Current.MainWindow = new AuthorizationWindow();
-            App.Current.MainWindow.Left = _window.Left;
-            App.Current.MainWindow.Top = _window.Top;
-            App.Current.MainWindow.Show();
-            _window.Close();
-            GC.Collect();
-        }
     }
 }

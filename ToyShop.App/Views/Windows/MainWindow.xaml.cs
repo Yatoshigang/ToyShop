@@ -30,7 +30,6 @@ namespace ToyShop.App.Views
         {
             InitializeComponent();
             DataContext = vm;
-            
         }
     }
 }

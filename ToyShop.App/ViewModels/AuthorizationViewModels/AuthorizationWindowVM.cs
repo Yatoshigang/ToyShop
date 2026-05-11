@@ -24,7 +24,6 @@ namespace ToyShop.App.ViewModels.AuthorizationViewModels
 
         public AuthorizationWindowVM()
         {
-
             _buttonTitle = "Регистрация";
             _frameContent = new LoginPage();
         }

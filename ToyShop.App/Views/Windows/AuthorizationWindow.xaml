@@ -13,6 +13,6 @@
             <RowDefinition Height=".05*"/>
         </Grid.RowDefinitions>
         <Frame Content="{Binding FrameContent}" NavigationUIVisibility="Hidden" Grid.Row="0"/>
-        <Button Grid.Row="1" HorizontalAlignment="Left" Content="{Binding ButtonTitle}" Command="{Binding ChangePageCommand}"/>
+        <Button Grid.Row="1" HorizontalAlignment="Left" Content="{Binding ButtonTitle}" Command="{Binding ChangePage}"/>
     </Grid>
 </Window>
