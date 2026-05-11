@@ -24,9 +24,15 @@ namespace ToyShop.App.ViewModels.AuthorizationViewModels
 
         public LoginVM()
         {
+#if DEBUG
+            _login = "LilTom";
+            _password = "qwerty";
+#else
             _login = string.Empty;
             _password = string.Empty;
-            _user = null!;
+            
+#endif
+                _user = null!;
         }
 
 
@@ -44,14 +50,14 @@ namespace ToyShop.App.ViewModels.AuthorizationViewModels
 
         void MainValidation()
         {
-            _user = App.ctx.users.Where(u => u.Login == _login && u.Password == _password).FirstOrDefault()!;
+            _user = App.ctx.Users.Where(u => u.Login == _login && u.Password == _password).FirstOrDefault()!;
         }
 
-        bool IsAdminValidation() => App.ctx.Administrations.Where(a => a.Id_adm_user == _user.Id).Any();
+        //bool IsAdminValidation() => App.ctx.Administrations.Where(a => a.Id_adm_user == _user.Id).Any();
 
         void GoToMainWindow()
         {
-            new MainWindowVM(_user, IsAdminValidation());
+            new MainWindowVM(_user, false);
         }
         
     }
