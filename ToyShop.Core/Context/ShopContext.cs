@@ -21,24 +21,19 @@ namespace ToyShop.Core.Context
         public ShopContext()
         {
             Database.EnsureCreated();
-
-            if (!Users.Any())
+            if (Users == null || !Users.Any())
             {
-                Users.Add(new User("Spenser", "Tom", "Lil", "Tom@gmail.com", "LilTom", "qwerty"));
-                Users.Add(new User("Lake", "Anna", "Villa", "Anna@gmail.com", "Admin", "qwerty"));
-                SaveChanges();
+                Users.AddRange(new User("Spenser", "Tom", "Lil", "Tom@gmail.com", "LilTom", "qwerty"), new User("Lake", "Anna", "Villa", "Anna@gmail.com", "Admin", "qwerty"));
             }
-            if (!Suppliers.Any())
+            if (Suppliers == null || !Suppliers.Any())
             {
                 Suppliers.Add( new Supplier("ООО \"Марка\"", "Россия", "89803934959") );
-                SaveChanges();
             }
-            if (!Administrations.Any())
+            if (Administrations == null || !Administrations.Any())
             {
                 Administrations.Add(new Administration("Lake", "Anna", "Villa", "Anna@gmail.com", "Admin", "qwerty"));
-                SaveChanges();
             }
-            
+            SaveChanges();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
