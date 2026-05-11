@@ -14,8 +14,10 @@ namespace ToyShop.App.ViewModels.MainViewModels
     /// </summary>
     public partial class MainWindowVM : ObservableObject
     {
-        Window _window;
-        string _windowTitle;
+        public List<InStartViewButton> InStartViewButtons { get; private set; }
+
+        [ObservableProperty]
+        object _frameContent;
 
         /// <summary>
         /// 
@@ -25,20 +27,48 @@ namespace ToyShop.App.ViewModels.MainViewModels
         
         public MainWindowVM(User user, bool userIsAdmin)
         {
+            InStartViewButtons = new();
+            
+
             App.user = user;
-            App.Current.MainWindow = _window = new MainWindow(this);
-            if (userIsAdmin)
-            {
-                _windowTitle = $"Учетная запись администратора {user.LastName} {char.ToUpper(user.FirstName[0])}.{char.ToUpper(user.MiddleName[0])}.";
-            }
-            else
-            {
-                _windowTitle = $"Учетная запись пользователя {user.LastName} {char.ToUpper(user.FirstName[0])}.{char.ToUpper(user.MiddleName[0])}.";
-            }
-            _window.Title = _windowTitle;
+            App.Current.MainWindow = new MainWindow(this);
+            App.Current.MainWindow.Title = AdminValidator(in user, in userIsAdmin);
+
+
             App.Current.MainWindow.Show();
             
             
         }
+
+
+        string AdminValidator(in User user, in bool userIsAdmin)
+        {
+            if (userIsAdmin)
+            {
+                 return $"Учетная запись администратора {user.LastName} {char.ToUpper(user.FirstName[0])}.{char.ToUpper(user.MiddleName[0])}.";
+            }
+            else
+            {
+                return $"Учетная запись пользователя {user.LastName} {char.ToUpper(user.FirstName[0])}.{char.ToUpper(user.MiddleName[0])}.";
+            }
+        }
+
+        void CreateInStartButtonsPool(in bool userIsAdmin)
+        {
+            if (userIsAdmin)
+            {
+                
+            }
+            else
+            {
+                InStartViewButtons.Add(new InStartViewButton());
+            }
+        }
+
+        void GoToComponent<T>()
+        {
+            
+        }
+
     }
 }
