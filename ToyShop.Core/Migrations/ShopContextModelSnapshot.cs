@@ -95,7 +95,7 @@ namespace ToyShop.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("brands");
+                    b.ToTable("Brands");
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Category", b =>
@@ -115,7 +115,7 @@ namespace ToyShop.Core.Migrations
                     b.HasIndex("Name_cat")
                         .IsUnique();
 
-                    b.ToTable("categories");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Customer", b =>
@@ -154,7 +154,7 @@ namespace ToyShop.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("customers");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Product", b =>
@@ -202,7 +202,7 @@ namespace ToyShop.Core.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("products");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Sale", b =>
@@ -242,7 +242,7 @@ namespace ToyShop.Core.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("sales");
+                    b.ToTable("Sales");
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Supplier", b =>
@@ -267,7 +267,7 @@ namespace ToyShop.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("suppliers");
+                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.User", b =>
@@ -304,7 +304,7 @@ namespace ToyShop.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("users");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Administration", b =>
