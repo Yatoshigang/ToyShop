@@ -7,8 +7,34 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProfilePage">
-
-    <Grid>
+    
+        <Grid>
         
-    </Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".1*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        
+            <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,0" Orientation="Horizontal">
+                <Button Content="Редактировать"/>
+                <Button Content="Удалить профиль"/>
+            </StackPanel>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".4*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="/Resources/X.png" Grid.Column="0"/>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="{Binding FirstName, StringFormat='Имя: \{0\}'}"/>
+                    <TextBlock Text="{Binding LastName, StringFormat='Фамилия: \{0\}'}"/>
+                    <TextBlock Text="{Binding Patronymic, StringFormat='Отчество: \{0\}'}"/>
+                    <TextBlock Text="{Binding Email, StringFormat='Эл. почта: \{0\}'}"/>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+
 </Page>

@@ -22,7 +22,7 @@ namespace ToyShop.App.Views.MainComponents
         public ProfilePage()
         {
             InitializeComponent();
-            DataContext = new ProfileVM();
+            DataContext = App.admin != null ? new ProfileVM(in App.admin) : new ProfileVM(in App.user);
         }
     }
 }
