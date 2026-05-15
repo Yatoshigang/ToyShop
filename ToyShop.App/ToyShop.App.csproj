@@ -18,11 +18,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\X.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.142" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ToyShop.Core\ToyShop.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\X.png" />
   </ItemGroup>
 
 </Project>

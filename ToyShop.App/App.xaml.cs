@@ -19,6 +19,10 @@ namespace ToyShop.App
         /// Свойство для сохранения экземпляра вошедшего пользователя
         /// </value>
         public static User user = null!;
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Administration admin = null!;
     }
 
 }
