@@ -1,13 +1,18 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ToyShop.App.ViewModels.MainViewModels.MainCommonViewModels;
+using ToyShop.App.ViewModels.MainViewModels.MainUserViewModels;
 using ToyShop.App.Views;
 using ToyShop.App.Views.MainComponents;
+using ToyShop.App.Views.MainComponents.MainAdminComponents;
 using ToyShop.Core.Models;
 
 namespace ToyShop.App.ViewModels.MainViewModels
@@ -18,63 +23,92 @@ namespace ToyShop.App.ViewModels.MainViewModels
     public partial class MainWindowVM : ObservableObject
     {
         Window _window;
-        List<InStartViewButton> _commonStartViewButtons;
-        public List<InStartViewButton> InStartViewButtons { get; private set; }
-
+        
         [ObservableProperty]
-        object _frameContent;
+        Dictionary<string, Page> _pages;
+        [ObservableProperty]
+        Page _frameContent;
+        
+
+
+        private MainWindowVM()
+        {
+            _window = App.Current.MainWindow;
+
+            _pages = new();
+            OnStartGenerateButtonsPool();
+
+            App.Current.MainWindow = new MainWindow(this);
+            App.Current.MainWindow.Left = _window.Left;
+            App.Current.MainWindow.Top = _window.Top;
+            
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="user">Экземпляр класса <see cref="User">User</see></param>
-        /// <param name="userIsAdmin">Параметр для проверки пользователя на права администратора</param>
-        
-        public MainWindowVM(User user, bool userIsAdmin)
+        /// <param name="user"></param>
+        public MainWindowVM(in User user) : this()
         {
-            _window = App.Current.MainWindow;
-
-            _commonStartViewButtons = new List<InStartViewButton>()
-            {
-                new InStartViewButton("Профиль", new ProfilePage()),
-                new InStartViewButton("Категории", new CategoriesPage()),
-                new InStartViewButton("Бренд", new BrandsPage()),
-                new InStartViewButton("Товары", new ProductsPage())
-            };
-            InStartViewButtons = _commonStartViewButtons;
-            _frameContent = InStartViewButtons.First().DependentPage;
-
+            App.admin = null!;
             App.user = user;
-            App.Current.MainWindow = new MainWindow(this);
-            App.Current.MainWindow.Left = _window.Left;
-            App.Current.MainWindow.Top = _window.Top;
-            App.Current.MainWindow.Title = OnStartAdminValidator(in user, in userIsAdmin);
-            _window.Close();
+
+            OnStartWriteTitle(in user);
+            OnStartGenerateButtonsPoolByRole();
+            _frameContent = _pages.First().Value;
+
             App.Current.MainWindow.Show();
+            _window.Close();
         }
 
-
-        string OnStartAdminValidator(in User user, in bool userIsAdmin)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="admin"></param>
+        public MainWindowVM(in Administration admin) : this()
         {
-            if (userIsAdmin)
+            App.user = null!;
+            App.admin = admin;
+
+            OnStartWriteTitle(admin);
+            OnStartGenerateButtonsPoolByRole();
+            _frameContent = _pages.First().Value;
+
+            App.Current.MainWindow.Show();
+            _window.Close();
+        }
+
+        void OnStartWriteTitle(in User user)
+        {
+            App.Current.MainWindow.Title = $"Учетная запись пользователя {user}.";
+        }
+
+        void OnStartWriteTitle(in Administration admin)
+        {
+            App.Current.MainWindow.Title = $"Учетная запись администратора {admin.LastName} {char.ToUpper(admin.FirstName[0])}.{char.ToUpper(admin.MiddleName[0])}.";
+        }
+
+        void OnStartGenerateButtonsPool()
+        {
+            Pages.Add("Профиль", null!);
+            Pages.Add("Категории", new CategoriesPage());
+            Pages.Add("Брэнд", new BrandsPage());
+            Pages.Add("Товары", new ProductsPage());
+            
+        }
+
+        void OnStartGenerateButtonsPoolByRole()
+        {
+            Pages[Pages.First().Key] = new ProfilePage();
+            if (App.admin != null)
             {
-                 return $"Учетная запись администратора {user.LastName} {char.ToUpper(user.FirstName[0])}.{char.ToUpper(user.MiddleName[0])}.";
+                Pages.Add("Продажи", new SalesPage());
+                Pages.Add("Поставщики", new SuppliersPage());
+                Pages.Add("Клиенты", new ClientsPage());
             }
             else
             {
-                return $"Учетная запись пользователя {user.LastName} {char.ToUpper(user.FirstName[0])}.{char.ToUpper(user.MiddleName[0])}.";
-            }
-        }
-
-        void OnStartGenerateButtonsPool(in bool userIsAdmin)
-        {
-            if (userIsAdmin)
-            {
-                
-            }
-            else
-            {
-                InStartViewButtons.Add(new InStartViewButton());
+                Pages.Add("Корзина", new CartPage());
             }
         }
 
@@ -85,7 +119,33 @@ namespace ToyShop.App.ViewModels.MainViewModels
             {
                 return;
             }
+            if (page is ProductsPage)
+            {
+                GoToProductsComponentWithCondition();
+                return;
+            }
             FrameContent = page;
+        }
+
+
+        public void GoToProductsComponentWithCondition(string filterObjective = "")
+        {
+            ProductsVM productsVM = Pages["Товары"].DataContext as ProductsVM;
+            if (!string.IsNullOrWhiteSpace(filterObjective))
+            {
+                productsVM?.SelectedProducts = new System.Collections.ObjectModel.ObservableCollection<Product>(productsVM.AllProducts.Where(ap => ap.Category.Name_cat == filterObjective || ap.Brand.Name == filterObjective));
+            }
+            else
+            {
+                productsVM?.SelectedProducts = productsVM?.AllProducts;
+            }
+            FrameContent = Pages["Товары"];
+            
+        }
+
+        public void AddProductInCart(Product product)
+        {
+            (Pages["Корзина"].DataContext as CartVM).Cart.Add(new CartWrapper(product));
         }
 
         [RelayCommand]
@@ -97,7 +157,6 @@ namespace ToyShop.App.ViewModels.MainViewModels
             App.Current.MainWindow.Top = _window.Top;
             App.Current.MainWindow.Show();
             _window.Close();
-            GC.Collect();
         }
     }
 }
