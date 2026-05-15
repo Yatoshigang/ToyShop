@@ -39,5 +39,10 @@ namespace ToyShop.Core.Models
         {
             
         }
+
+        public override string ToString()
+        {
+            return $"{this.LastName} {char.ToUpper(this.FirstName[0])}.{char.ToUpper(this.MiddleName[0])}";
+        }
     }
 }
