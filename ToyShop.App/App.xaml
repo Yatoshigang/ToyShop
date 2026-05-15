@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:ToyShop.App"
              StartupUri="Views/Windows/AuthorizationWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="/Resources/Styles/ButtonsStyle.xaml"/>
     </Application.Resources>
 </Application>
