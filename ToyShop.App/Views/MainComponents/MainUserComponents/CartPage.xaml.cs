@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ToyShop.App.ViewModels.MainViewModels.MainUserViewModels;
 
 namespace ToyShop.App.Views.MainComponents
 {
@@ -21,6 +22,7 @@ namespace ToyShop.App.Views.MainComponents
         public CartPage()
         {
             InitializeComponent();
+            DataContext = new CartVM();
         }
     }
 }
