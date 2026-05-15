@@ -20,20 +20,26 @@ namespace ToyShop.Core.Context
 
         public ShopContext()
         {
-            Database.EnsureCreated();
-            if (Users == null || !Users.Any())
+            if (Database.EnsureCreated())
             {
-                Users.AddRange(new User("Spenser", "Tom", "Lil", "Tom@gmail.com", "LilTom", "qwerty"), new User("Lake", "Anna", "Villa", "Anna@gmail.com", "Admin", "qwerty"));
+
+                if (Users == null || !Users.Any())
+                {
+                    Users.AddRange(new User("Spenser", "Tom", "Lil", "Tom@gmail.com", "LilTom", "qwerty"), new User("Lake", "Anna", "Villa", "Anna@gmail.com", "Admin", "qwerty"));
+                    SaveChanges();
+                }
+                if (Suppliers == null || !Suppliers.Any())
+                {
+                    Suppliers.Add(new Supplier("ООО \"Марка\"", "Россия", "89803934959"));
+                    SaveChanges();
+                }
+                if (Administrations == null || !Administrations.Any())
+                {
+                    Administrations.Add(new Administration("Lake", "Anna", "Villa", "Anna@gmail.com", "Admin", "qwerty"));
+                    SaveChanges();
+                }
             }
-            if (Suppliers == null || !Suppliers.Any())
-            {
-                Suppliers.Add( new Supplier("ООО \"Марка\"", "Россия", "89803934959") );
-            }
-            if (Administrations == null || !Administrations.Any())
-            {
-                Administrations.Add(new Administration("Lake", "Anna", "Villa", "Anna@gmail.com", "Admin", "qwerty"));
-            }
-            SaveChanges();
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
