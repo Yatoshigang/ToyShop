@@ -6,6 +6,8 @@ using System.Text;
 using System.Xml;
 using ToyShop.App.Views.AuthorizationComponents;
 using ToyShop.App.Views;
+using ToyShop.Core.Models;
+using System.Windows;
 
 namespace ToyShop.App.ViewModels.AuthorizationViewModels
 {
@@ -14,6 +16,8 @@ namespace ToyShop.App.ViewModels.AuthorizationViewModels
     /// </summary>
     public partial class RegistrationVM : ObservableObject
     {
+        User _user;
+
         [ObservableProperty]
         string _lastName;
         [ObservableProperty]
@@ -30,15 +34,30 @@ namespace ToyShop.App.ViewModels.AuthorizationViewModels
 
         public RegistrationVM()
         {
+#if DEBUG
+            _lastName = "Иванов";
+            _firstName = "Иван";
+            _patronymic = "Иванович";
+            _email = "Ivan@mail.com";
+            _login = "Ivan";
+            _password = "qwerty";
+#else
             _lastName = _firstName = _patronymic = _email = _login = _password = string.Empty;
+#endif
+            _user = new();
         }
 
         [RelayCommand]
         void SubmitRegistration()
         {
-            if (Validation(LastName) && Validation(FirstName) && Validation(Patronymic) && Validation(Email) && Validation(Login) && PasswordValidation())
+            if (PasswordValidation() && Validation(LastName) && Validation(FirstName) && Validation(Patronymic) && Validation(Login) && Validation(Password))
             {
-                
+                SaveData();
+                MessageBox.Show("Успех");
+            }
+            else
+            {
+                MessageBox.Show("Неправильно введены данные");
             }
         }
 
@@ -74,6 +93,18 @@ namespace ToyShop.App.ViewModels.AuthorizationViewModels
             return true;
         }
 
-
+        
+        void SaveData()
+        {
+            _user = new();
+            _user.LastName = LastName;
+            _user.FirstName = FirstName;
+            _user.MiddleName = Patronymic;
+            _user.Email = Email;
+            _user.Login = Login;
+            _user.Password = Password;
+            App.ctx.Users.Add(_user);
+            App.ctx.SaveChanges();
+        }
     }
 }

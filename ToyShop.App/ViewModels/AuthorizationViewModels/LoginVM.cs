@@ -9,6 +9,7 @@ using ToyShop.App.ViewModels.MainViewModels;
 using ToyShop.App.Views;
 using ToyShop.Core.Models;
 using ToyShop.App.Views.AuthorizationComponents;
+using Microsoft.EntityFrameworkCore;
 namespace ToyShop.App.ViewModels.AuthorizationViewModels
 {
     /// <summary>
@@ -21,6 +22,7 @@ namespace ToyShop.App.ViewModels.AuthorizationViewModels
         [ObservableProperty]
         string _password;
         User _user;
+        Administration _admin;
 
         public LoginVM()
         {
@@ -32,32 +34,48 @@ namespace ToyShop.App.ViewModels.AuthorizationViewModels
             _password = string.Empty;
             
 #endif
-                _user = null!;
+            _user = null!;
+            _admin = null!;
         }
 
 
         [RelayCommand]
         void SubmitLogin()
         {
-            MainValidation();
-            if (_user == null)
+            _user = App.ctx.Users.Where(u => u.Login == Login && u.Password == Password).FirstOrDefault()!;
+            _admin = App.ctx.Administrations.Where(a => a.Login == Login && a.Password == Password).FirstOrDefault()!;
+
+            if (_user == null && _admin == null)
             {
                 MessageBox.Show("Неправильный логин или пароль");
                 return;
             }
-            GoToMainWindow();
+            else if (_admin != null)
+            {
+                GoToMainWindow(true);
+                _user = null!;
+                return;
+            }
+            else if (_user != null)
+            {
+                GoToMainWindow(false);
+                _admin = null!;
+                return;
+            }
         }
 
-        void MainValidation()
-        {
-            _user = App.ctx.Users.Where(u => u.Login == _login && u.Password == _password).FirstOrDefault()!;
-        }
 
-        //bool IsAdminValidation() => App.ctx.Administrations.Where(a => a.Id_adm_user == _user.Id).Any();
 
-        void GoToMainWindow()
+        void GoToMainWindow(bool isAdmin)
         {
-            new MainWindowVM(_user, false);
+            if (isAdmin)
+            {
+                new MainWindowVM(in _admin);
+            }
+            else
+            {
+                new MainWindowVM(in _user);
+            }
         }
         
     }

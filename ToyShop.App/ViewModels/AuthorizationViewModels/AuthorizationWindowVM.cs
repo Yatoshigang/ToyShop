@@ -16,8 +16,8 @@ namespace ToyShop.App.ViewModels.AuthorizationViewModels
         [ObservableProperty]
         string _buttonTitle;
 
-        object _loginPage = new LoginPage();
-        object _registrationPage = new RegistrationPage();
+        LoginPage _loginPage = new LoginPage();
+        RegistrationPage _registrationPage = new RegistrationPage();
 
         [ObservableProperty]
         object _frameContent;
