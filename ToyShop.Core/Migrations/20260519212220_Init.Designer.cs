@@ -12,7 +12,7 @@ using ToyShop.Core.Context;
 namespace ToyShop.Core.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20260507210917_Init")]
+    [Migration("20260519212220_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -57,9 +57,6 @@ namespace ToyShop.Core.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
@@ -68,9 +65,19 @@ namespace ToyShop.Core.Migrations
                     b.HasIndex("Login")
                         .IsUnique();
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Administrations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "Dick@gmail.com",
+                            FirstName = "Richard",
+                            LastName = "Spenser",
+                            Login = "Admin",
+                            MiddleName = "Swen",
+                            Password = "qwerty"
+                        });
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Brand", b =>
@@ -99,6 +106,16 @@ namespace ToyShop.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Brands");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Country = "USA",
+                            DateOfOpen = new DateOnly(2000, 5, 12),
+                            Name = "lego",
+                            Site = "lego.com"
+                        });
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Category", b =>
@@ -119,6 +136,18 @@ namespace ToyShop.Core.Migrations
                         .IsUnique();
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name_cat = "Конструкторы"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name_cat = "Настольные игры"
+                        });
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Customer", b =>
@@ -158,6 +187,19 @@ namespace ToyShop.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateOfBirth = new DateOnly(1996, 5, 12),
+                            DateOfRegistration = new DateOnly(1, 1, 1),
+                            Email = "vinir@mail.ru",
+                            FirstName = "Анна",
+                            LastName = "Винирова",
+                            MiddleName = "Сергеевна",
+                            Number = "89832343234"
+                        });
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Product", b =>
@@ -271,6 +313,15 @@ namespace ToyShop.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Suppliers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Country_sup = "Россия",
+                            Name_sup = "ООО \"Марка\"",
+                            Number = "89803934959"
+                        });
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.User", b =>
@@ -308,17 +359,18 @@ namespace ToyShop.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
 
-            modelBuilder.Entity("ToyShop.Core.Models.Administration", b =>
-                {
-                    b.HasOne("ToyShop.Core.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "Tom@gmail.com",
+                            FirstName = "Tom",
+                            LastName = "Spenser",
+                            Login = "LilTom",
+                            MiddleName = "Lil",
+                            Password = "qwerty"
+                        });
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Product", b =>

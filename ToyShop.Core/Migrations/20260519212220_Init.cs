@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ToyShop.Core.Migrations
 {
     /// <inheritdoc />
@@ -11,6 +13,24 @@ namespace ToyShop.Core.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Administrations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Login = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Administrations", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Brands",
                 columns: table => new
@@ -132,31 +152,6 @@ namespace ToyShop.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Administrations",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Login = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Administrations", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Administrations_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Sales",
                 columns: table => new
                 {
@@ -193,6 +188,40 @@ namespace ToyShop.Core.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Administrations",
+                columns: new[] { "Id", "Email", "FirstName", "LastName", "Login", "MiddleName", "Password" },
+                values: new object[] { 1, "Dick@gmail.com", "Richard", "Spenser", "Admin", "Swen", "qwerty" });
+
+            migrationBuilder.InsertData(
+                table: "Brands",
+                columns: new[] { "Id", "Country", "DateOfOpen", "Name", "Site" },
+                values: new object[] { 1, "USA", new DateOnly(2000, 5, 12), "lego", "lego.com" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name_cat" },
+                values: new object[,]
+                {
+                    { 1, "Конструкторы" },
+                    { 2, "Настольные игры" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Customers",
+                columns: new[] { "Id", "DateOfBirth", "DateOfRegistration", "Email", "FirstName", "LastName", "MiddleName", "Number" },
+                values: new object[] { 1, new DateOnly(1996, 5, 12), new DateOnly(1, 1, 1), "vinir@mail.ru", "Анна", "Винирова", "Сергеевна", "89832343234" });
+
+            migrationBuilder.InsertData(
+                table: "Suppliers",
+                columns: new[] { "Id", "Country_sup", "Name_sup", "Number" },
+                values: new object[] { 1, "Россия", "ООО \"Марка\"", "89803934959" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Email", "FirstName", "LastName", "Login", "MiddleName", "Password" },
+                values: new object[] { 1, "Tom@gmail.com", "Tom", "Spenser", "LilTom", "Lil", "qwerty" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Administrations_Email",
                 table: "Administrations",
@@ -204,11 +233,6 @@ namespace ToyShop.Core.Migrations
                 table: "Administrations",
                 column: "Login",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Administrations_UserId",
-                table: "Administrations",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_Name_cat",
