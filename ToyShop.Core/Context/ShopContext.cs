@@ -20,31 +20,57 @@ namespace ToyShop.Core.Context
 
         public ShopContext()
         {
-            if (Database.EnsureCreated())
+            
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            
+            modelBuilder.Entity<User>(b =>
             {
+                b.HasData(new User { Id = 1, LastName = "Spenser", FirstName = "Tom", MiddleName = "Lil", Email = "Tom@gmail.com", Login = "LilTom", Password="qwerty"});
+            });
 
-                if (Users == null || !Users.Any())
-                {
-                    Users.AddRange(new User("Spenser", "Tom", "Lil", "Tom@gmail.com", "LilTom", "qwerty"), new User("Lake", "Anna", "Villa", "Anna@gmail.com", "Admin", "qwerty"));
-                    SaveChanges();
-                }
-                if (Suppliers == null || !Suppliers.Any())
-                {
-                    Suppliers.Add(new Supplier("ООО \"Марка\"", "Россия", "89803934959"));
-                    SaveChanges();
-                }
-                if (Administrations == null || !Administrations.Any())
-                {
-                    Administrations.Add(new Administration("Lake", "Anna", "Villa", "Anna@gmail.com", "Admin", "qwerty"));
-                    SaveChanges();
-                }
-            }
+            
+            modelBuilder.Entity<Administration>(b =>
+            {
+                b.HasData(new Administration { Id = 1, LastName = "Spenser", FirstName = "Richard", MiddleName = "Swen", Email = "Dick@gmail.com", Login = "Admin", Password = "qwerty" });
+            });
 
+            modelBuilder.Entity<Brand>(b =>
+            {
+                b.HasData(new Brand { Id = 1, Name = "lego", Country = "USA", DateOfOpen = new DateOnly(2000, 5, 12), Site = "lego.com" });
+            });
+
+            modelBuilder.Entity<Category>(b =>
+            {
+                b.HasData(new Category { Id = 1, Name_cat = "Конструкторы" }, new Category { Id = 2, Name_cat = "Настольные игры" });
+            });
+
+            modelBuilder.Entity<Supplier>(b =>
+            {
+                b.HasData(new Supplier { Id = 1, Name_sup = "ООО \"Марка\"", Country_sup = "Россия", Number = "89803934959" });
+            });
+
+            modelBuilder.Entity<Customer>(b =>
+            {
+                b.HasData(new Customer { Id = 1, LastName = "Винирова", FirstName = "Анна", MiddleName = "Сергеевна", Email = "vinir@mail.ru", Number = "89832343234", DateOfBirth = new DateOnly(1996, 5, 12) });
+            });
+
+            modelBuilder.Entity<Product>(b =>
+            {
+                b.HasData();
+            });
+
+            modelBuilder.Entity<Sale>(b =>
+            {
+                b.HasData();
+            });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ToyShop;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30"));
+            base.OnConfiguring(optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Test;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30"));
         }
     }
 }
