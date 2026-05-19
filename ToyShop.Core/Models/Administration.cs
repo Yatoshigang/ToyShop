@@ -15,8 +15,6 @@ namespace ToyShop.Core.Models
     public class Administration
     {
         public int Id { get; set; }
-        public User User { get; set; } = new();
-        public int Id_adm_user { get => User.Id; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -26,8 +24,6 @@ namespace ToyShop.Core.Models
 
         public Administration(string lastName, string firstName, string middleName, string email, string login, string password)
         {
-            User = new();
-
             LastName = lastName;
             FirstName = firstName;
             MiddleName = middleName;
