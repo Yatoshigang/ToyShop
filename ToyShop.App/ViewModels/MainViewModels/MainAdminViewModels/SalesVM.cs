@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +12,8 @@ namespace ToyShop.App.ViewModels.MainViewModels.MainAdminViewModels
     {
         [ObservableProperty]
         ObservableCollection<Sale> _sales;
+        [ObservableProperty]
+        string _search;
 
         public SalesVM()
         {
@@ -20,6 +23,12 @@ namespace ToyShop.App.ViewModels.MainViewModels.MainAdminViewModels
         void Refresh()
         {
             Sales = new ObservableCollection<Sale>(App.ctx.Sales.ToList());
+        }
+
+        [RelayCommand]
+        void AddSale()
+        {
+            
         }
     }
 }

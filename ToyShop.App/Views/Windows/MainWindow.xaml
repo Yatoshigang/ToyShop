@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToyShop.App.Views"
         mc:Ignorable="d"
-        MinHeight="500" MinWidth="800" Height="800" Width="1200">
+        MinHeight="500" MinWidth="800" Height="800" Width="1200" Background="{StaticResource BackgroundBrush}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height=".15*"/>
@@ -31,8 +31,7 @@
                 </ItemsControl>
             <Button Grid.Column="1" Content="Выход" Command="{Binding LogOutCommand}" VerticalAlignment="Center" Margin="10" Height="50" Width="150"/>
         </Grid>
-        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2" Margin="10">
-            <Frame Content="{Binding FrameContent}" NavigationUIVisibility="Hidden"/>
-        </Border>
+        
+            <Frame Grid.Row="1" Content="{Binding FrameContent}" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

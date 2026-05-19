@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ToyShop.App.Views"
         xmlns:comp="clr-namespace:ToyShop.App.Views.AuthorizationComponents"
         mc:Ignorable="d"
-        Title="Авторизация" MinHeight="500" MinWidth="600" Height="500" Width="600">
+        Title="Авторизация" Background="{StaticResource BackgroundBrush}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

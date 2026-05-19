@@ -34,4 +34,9 @@
     <Resource Include="Resources\X.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Windows\Forms\Common\" />
+    <Folder Include="Views\Windows\Forms\User\" />
+  </ItemGroup>
+
 </Project>

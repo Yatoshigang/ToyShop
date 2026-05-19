@@ -4,6 +4,17 @@
              xmlns:local="clr-namespace:ToyShop.App"
              StartupUri="Views/Windows/AuthorizationWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary Source="/Resources/Styles/ButtonsStyle.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Styles/ButtonsStyle.xaml"/> 
+                <ResourceDictionary Source="/Resources/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="/Resources/Styles/TextBlockStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/Styles/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/Styles/ScrollBarStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/Styles/TextBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/Styles/ItemsControlStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/Styles/ListViewStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

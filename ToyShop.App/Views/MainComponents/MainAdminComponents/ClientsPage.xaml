@@ -36,7 +36,7 @@
 
         <ListView Grid.Row="1" ItemsSource="{Binding Clients}">
             <ListView.View>
-                <GridView >
+                <GridView>
                     <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding FirstName}"/>
                     <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding LastName}"/>
                     <GridViewColumn Header="Отчество" DisplayMemberBinding="{Binding MiddleName}"/>
