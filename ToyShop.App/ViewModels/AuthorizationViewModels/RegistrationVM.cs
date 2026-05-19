@@ -8,6 +8,7 @@ using ToyShop.App.Views.AuthorizationComponents;
 using ToyShop.App.Views;
 using ToyShop.Core.Models;
 using System.Windows;
+using System.Text.RegularExpressions;
 
 namespace ToyShop.App.ViewModels.AuthorizationViewModels
 {
@@ -50,7 +51,7 @@ namespace ToyShop.App.ViewModels.AuthorizationViewModels
         [RelayCommand]
         void SubmitRegistration()
         {
-            if (PasswordValidation() && Validation(LastName) && Validation(FirstName) && Validation(Patronymic) && Validation(Login) && Validation(Password))
+            if (PasswordValidation() && Validation(LastName) && Validation(FirstName) && Validation(Patronymic) && Validation(Login) && Validation(Password) && EmailValidation())
             {
                 SaveData();
                 MessageBox.Show("Успех");
@@ -77,6 +78,13 @@ namespace ToyShop.App.ViewModels.AuthorizationViewModels
             }
             return true;
         }
+
+        bool EmailValidation()
+        {
+            Regex pattern = new Regex(@"^\w+@[A-z]+.[a-z]+$", RegexOptions.Compiled);
+            return pattern.IsMatch(Email);
+        }
+
         bool PasswordValidation()
         {
             if (string.IsNullOrWhiteSpace(Password))
