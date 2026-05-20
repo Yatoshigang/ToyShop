@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using ToyShop.Core.Models;
+using ToyShop.Core.Representations;
 
 namespace ToyShop.Core.Context
 {
@@ -59,13 +60,20 @@ namespace ToyShop.Core.Context
 
             modelBuilder.Entity<Product>(b =>
             {
-                b.HasData();
+                b.HasData(new Product { Id = 1, Name_prod = "Монополия", Article = "Monopslia", Barcode = 190, Price = 2000, Quantity_sklad = 40, AgeRestriction = 0 },
+                          new Product{ Id = 2, Name_prod = "UNO", Article = "Uno", Barcode = 200, Price = 1300, Quantity_sklad = 100, AgeRestriction = 6 },
+                          new Product{ Id = 3, Name_prod = "Lego Duplo", Article = "Duplo", Barcode = 13, Price = 3500, Quantity_sklad = 200, AgeRestriction = 3},
+                          new Product{ Id = 4, Name_prod = "Lego Technic", Article = "Techno", Barcode = 16, Price = 6000, Quantity_sklad = 150, AgeRestriction = 14});
             });
 
             modelBuilder.Entity<Sale>(b =>
             {
-                b.HasData();
+                b.HasData(new Sale { Id = 1, Date_sale = DateTime.Now, Status = Statuses.PaymentAwait, Quantity = 2, TotalAmount = 4000},
+                          new Sale { Id = 2, Date_sale = DateTime.Today, Status = Statuses.Paid, Quantity = 3, TotalAmount = 3900},
+                          new Sale { Id = 3, Date_sale = DateTime.Now, Status = Statuses.Completed, Quantity = 1, TotalAmount = 3500},
+                          new Sale { Id = 4, Date_sale = DateTime.Now, Status = Statuses.Adopted, Quantity = 10, TotalAmount = 60000});
             });
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
