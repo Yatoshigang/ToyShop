@@ -12,7 +12,7 @@ using ToyShop.Core.Context;
 namespace ToyShop.Core.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20260519212220_Init")]
+    [Migration("20260524165759_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -115,6 +115,14 @@ namespace ToyShop.Core.Migrations
                             DateOfOpen = new DateOnly(2000, 5, 12),
                             Name = "lego",
                             Site = "lego.com"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Country = "USA",
+                            DateOfOpen = new DateOnly(2000, 5, 12),
+                            Name = "Hasbro",
+                            Site = "Hasbro.com"
                         });
                 });
 
@@ -248,6 +256,60 @@ namespace ToyShop.Core.Migrations
                     b.HasIndex("SupplierId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AgeRestriction = 0,
+                            Article = "Monopslia",
+                            Barcode = 190,
+                            BrandId = 2,
+                            CategoryId = 2,
+                            Name_prod = "Монополия",
+                            Price = 2000m,
+                            Quantity_sklad = 40,
+                            SupplierId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AgeRestriction = 6,
+                            Article = "Uno",
+                            Barcode = 200,
+                            BrandId = 2,
+                            CategoryId = 2,
+                            Name_prod = "UNO",
+                            Price = 1300m,
+                            Quantity_sklad = 100,
+                            SupplierId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AgeRestriction = 3,
+                            Article = "Duplo",
+                            Barcode = 13,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            Name_prod = "Lego Duplo",
+                            Price = 3500m,
+                            Quantity_sklad = 200,
+                            SupplierId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AgeRestriction = 14,
+                            Article = "Techno",
+                            Barcode = 16,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            Name_prod = "Lego Technic",
+                            Price = 6000m,
+                            Quantity_sklad = 150,
+                            SupplierId = 1
+                        });
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Sale", b =>
@@ -288,6 +350,52 @@ namespace ToyShop.Core.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Sales");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CustomerId = 1,
+                            Date_sale = new DateTime(2026, 10, 12, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = 1,
+                            Quantity = 2,
+                            Status = 2,
+                            TotalAmount = 4000m,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CustomerId = 1,
+                            Date_sale = new DateTime(2026, 10, 12, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = 2,
+                            Quantity = 3,
+                            Status = 3,
+                            TotalAmount = 3900m,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CustomerId = 1,
+                            Date_sale = new DateTime(2026, 10, 12, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = 3,
+                            Quantity = 1,
+                            Status = 4,
+                            TotalAmount = 3500m,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CustomerId = 1,
+                            Date_sale = new DateTime(2026, 10, 12, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = 4,
+                            Quantity = 10,
+                            Status = 1,
+                            TotalAmount = 60000m,
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("ToyShop.Core.Models.Supplier", b =>

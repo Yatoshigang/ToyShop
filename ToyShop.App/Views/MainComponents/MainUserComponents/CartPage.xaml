@@ -26,7 +26,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Image Source="/Resources/X.png" Grid.Column="0" Height="100" Width="100"/>
+                    <Image Source="/Resources/Styles/Images/games.png" Grid.Column="0" Height="100" Width="100"/>
 
                     <StackPanel Grid.Column="1" Orientation="Vertical">
                         <TextBlock Text="{Binding Product.Name_prod, StringFormat='Название: \{0\}'}"/>

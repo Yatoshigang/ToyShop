@@ -26,13 +26,13 @@
             <TextBox Grid.Column="0" Text="{Binding Search}" Margin="5"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <ComboBox ItemsSource="{Binding Sorts}" SelectedIndex="{Binding SelectedSort}" Margin="5" Width="150"/>
-                <ComboBox ItemsSource="{Binding Filters}" SelectedIndex="{Binding SelectedFilter}" Margin="5" Width="150"/>
+                <ComboBox ItemsSource="{Binding Filters}" SelectedIndex="{Binding SelectedFilter}" Margin="5" Width="150" />
             </StackPanel>
             <StackPanel Grid.Column="2" Orientation="Horizontal">
-                <Button Content="Обновить" Command="{Binding RefreshCommand}" Margin="5" Width="75"/>
-                <Button Content="Добавить" Command="{Binding AddCommand}" Margin="5" Width="75"/>
-                <Button Content="Редактировать" Command="{Binding ManageCommand}" Margin="5" Width="75"/>
-                <Button Content="Удалить" Command="{Binding DeleteCommand}" Margin="5" Width="75"/>
+                <Button Content="Обновить" Command="{Binding RefreshCommand}" Margin="5" Width="120" Height="50"/>
+                <Button Content="Добавить" Command="{Binding AddCommand}" Margin="5" Width="120" Height="50"/>
+                <Button Content="Редактировать" Command="{Binding ManageCommand}" Margin="5" Width="120" Height="50"/>
+                <Button Content="Удалить" Command="{Binding DeleteCommand}" Margin="5" Width="120" Height="50"/>
             </StackPanel>
         </Grid>
 
@@ -56,7 +56,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Image Source="/Resources/X.png" Grid.Column="0" Width="150" Height="150"/>
+                            <Image Source="/Resources/Styles/Images/games.png" Grid.Column="0" Width="150" Height="150"/>
                             <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <TextBlock Text="{Binding Name_prod, StringFormat='Название: \{0\}'}"/>
                                 <TextBlock Text="{Binding Brand.Name, StringFormat='Брэнд: \{0\}'}"/>

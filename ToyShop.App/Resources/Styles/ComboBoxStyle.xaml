@@ -9,5 +9,6 @@
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="Padding" Value="8,6"/>
         <Setter Property="Height" Value="32"/>
+        
     </Style>
 </ResourceDictionary>

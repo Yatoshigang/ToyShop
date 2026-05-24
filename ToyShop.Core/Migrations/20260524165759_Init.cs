@@ -196,7 +196,11 @@ namespace ToyShop.Core.Migrations
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "Id", "Country", "DateOfOpen", "Name", "Site" },
-                values: new object[] { 1, "USA", new DateOnly(2000, 5, 12), "lego", "lego.com" });
+                values: new object[,]
+                {
+                    { 1, "USA", new DateOnly(2000, 5, 12), "lego", "lego.com" },
+                    { 2, "USA", new DateOnly(2000, 5, 12), "Hasbro", "Hasbro.com" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -221,6 +225,28 @@ namespace ToyShop.Core.Migrations
                 table: "Users",
                 columns: new[] { "Id", "Email", "FirstName", "LastName", "Login", "MiddleName", "Password" },
                 values: new object[] { 1, "Tom@gmail.com", "Tom", "Spenser", "LilTom", "Lil", "qwerty" });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "AgeRestriction", "Article", "Barcode", "BrandId", "CategoryId", "Name_prod", "Price", "Quantity_sklad", "SupplierId" },
+                values: new object[,]
+                {
+                    { 1, 0, "Monopslia", 190, 2, 2, "Монополия", 2000m, 40, 1 },
+                    { 2, 6, "Uno", 200, 2, 2, "UNO", 1300m, 100, 1 },
+                    { 3, 3, "Duplo", 13, 1, 1, "Lego Duplo", 3500m, 200, 1 },
+                    { 4, 14, "Techno", 16, 1, 1, "Lego Technic", 6000m, 150, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Sales",
+                columns: new[] { "Id", "CustomerId", "Date_sale", "ProductId", "Quantity", "Status", "TotalAmount", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2026, 10, 12, 22, 30, 0, 0, DateTimeKind.Unspecified), 1, 2, 2, 4000m, 1 },
+                    { 2, 1, new DateTime(2026, 10, 12, 22, 30, 0, 0, DateTimeKind.Unspecified), 2, 3, 3, 3900m, 1 },
+                    { 3, 1, new DateTime(2026, 10, 12, 22, 30, 0, 0, DateTimeKind.Unspecified), 3, 1, 4, 3500m, 1 },
+                    { 4, 1, new DateTime(2026, 10, 12, 22, 30, 0, 0, DateTimeKind.Unspecified), 4, 10, 1, 60000m, 1 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Administrations_Email",

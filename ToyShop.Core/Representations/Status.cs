@@ -7,13 +7,12 @@ namespace ToyShop.Core.Representations
     /// <summary>
     /// Перечисление статусов заказа
     /// </summary>
-    [Flags]
-    public enum Statuses
+    public enum Status
     {
-        Pending = 0 << 0,
-        Adopted = 0 << 1,
-        PaymentAwait = 0 << 2,
-        Paid = 0 << 3,
-        Completed = Adopted | Paid
+        Pending = 0,
+        Adopted = 1,
+        PaymentAwait = 2,
+        Paid = 3,
+        Completed = 4
     }
 }
