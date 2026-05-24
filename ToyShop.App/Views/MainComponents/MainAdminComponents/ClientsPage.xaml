@@ -7,7 +7,14 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ClientsPage">
-
+    <Page.Resources>
+        <DataTemplate x:Key="SharedCellTemplate">
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Ellipse Fill="White" Width="12" Height="12" Margin="0,0,5,0"/>
+                <TextBlock Text="{Binding PropertyName}"/>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height=".1*"/>
@@ -35,17 +42,24 @@
         </Grid>
 
         <ListView Grid.Row="1" ItemsSource="{Binding Clients}">
-            <ListView.View>
-                <GridView >
-                    <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding FirstName}"/>
-                    <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding LastName}"/>
-                    <GridViewColumn Header="Отчество" DisplayMemberBinding="{Binding MiddleName}"/>
-                    <GridViewColumn Header="Эл. почта" DisplayMemberBinding="{Binding Email}"/>
-                    <GridViewColumn Header="Телефон" DisplayMemberBinding="{Binding Number}"/>
-                    <GridViewColumn Header="Дата рож." DisplayMemberBinding="{Binding DateOfBirth}"/>
-                    <GridViewColumn Header="Дата рег." DisplayMemberBinding="{Binding DateOfRegistration}"/>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding FirstName}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <!--<ListView.View>
+                
+                <GridView>
+                    
+                    <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding FirstName}" CellTemplate="{StaticResource SharedCellTemplate}"/>
+                    <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding LastName}" CellTemplate="{StaticResource SharedCellTemplate}"/>
+                    <GridViewColumn Header="Отчество" DisplayMemberBinding="{Binding MiddleName}" CellTemplate="{StaticResource SharedCellTemplate}"/>
+                    <GridViewColumn Header="Эл. почта" DisplayMemberBinding="{Binding Email}" CellTemplate="{StaticResource SharedCellTemplate}"/>
+                    <GridViewColumn Header="Телефон" DisplayMemberBinding="{Binding Number}" CellTemplate="{StaticResource SharedCellTemplate}"/>
+                    <GridViewColumn Header="Дата рож." DisplayMemberBinding="{Binding DateOfBirth}" CellTemplate="{StaticResource SharedCellTemplate}"/>
+                    <GridViewColumn Header="Дата рег." DisplayMemberBinding="{Binding DateOfRegistration}" CellTemplate="{StaticResource SharedCellTemplate}"/>
                 </GridView>
-            </ListView.View>
+            </ListView.View>-->
         </ListView>
     </Grid>
 </Page>

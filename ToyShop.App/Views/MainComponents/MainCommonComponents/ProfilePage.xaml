@@ -26,12 +26,12 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Image Source="/Resources/X.png" Grid.Column="0"/>
-                <StackPanel Grid.Column="1">
-                    <TextBlock Text="{Binding FirstName, StringFormat='Имя: \{0\}'}"/>
-                    <TextBlock Text="{Binding LastName, StringFormat='Фамилия: \{0\}'}"/>
-                    <TextBlock Text="{Binding Patronymic, StringFormat='Отчество: \{0\}'}"/>
-                    <TextBlock Text="{Binding Email, StringFormat='Эл. почта: \{0\}'}"/>
+                <Image Source="/Resources/Styles/Images/vechicle.png" Grid.Column="0"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="200,0,0,0">
+                    <TextBlock Text="{Binding FirstName, StringFormat='Имя: \{0\}'}" FontSize="20" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding LastName, StringFormat='Фамилия: \{0\}'}" FontSize="20" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding Patronymic, StringFormat='Отчество: \{0\}'}" FontSize="20" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding Email, StringFormat='Эл. почта: \{0\}'}" FontSize="20" FontWeight="SemiBold"/>
                 </StackPanel>
             </Grid>
 

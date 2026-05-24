@@ -17,12 +17,12 @@ namespace ToyShop.Core.Models
         public int Quantity_sklad { get; set; }
         public int AgeRestriction { get; set; }
 
-        public Brand Brand { get; set; } = new();
-        public int Id_brand { get => Brand.Id; }
-        public Category Category { get; set; } = new();
-        public int Id_category { get => Category.Id; }
-        public Supplier Supplier { get; set; } = new();
-        public int Id_suppl { get => Supplier.Id; }
+        public Brand? Brand { get; set; }
+        public int BrandId { get; set; }
+        public Category? Category { get; set; }
+        public int CategoryId { get; set; }
+        public Supplier? Supplier { get; set; }
+        public int SupplierId { get; set; }
 
         public Product(string name, string article, int barcode, decimal price, int quantity, int ageRestriction)
         {
@@ -33,9 +33,6 @@ namespace ToyShop.Core.Models
             Quantity_sklad = quantity;
             AgeRestriction = ageRestriction;
 
-            Brand = new();
-            Category = new();
-            Supplier = new();
         }
 
         public Product() : this(string.Empty, string.Empty, -1, -1, 0, 0) { }

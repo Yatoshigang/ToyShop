@@ -14,15 +14,22 @@ namespace ToyShop.App
         /// <value>
         /// Свойство для контекста базы данных
         /// </value>
-        public static ShopContext ctx = new();
+        public static ShopContext ctx;
         /// <value>
         /// Свойство для сохранения экземпляра вошедшего пользователя
         /// </value>
-        public static User user = null!;
+        public static User user;
         /// <summary>
         /// 
         /// </summary>
-        public static Administration admin = null!;
+        public static Administration admin;
+
+        static App()
+        {
+            ctx = new();
+            user = null!;
+            admin = null!;
+        }
     }
 
 }

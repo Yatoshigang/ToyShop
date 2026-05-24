@@ -58,7 +58,7 @@ namespace ToyShop.App.ViewModels.MainViewModels.MainCommonViewModels
         [RelayCommand]
         void AddToCartByDoubleClick()
         {
-            if (App.admin == null)
+            if (App.admin == null && SelectedProduct != null)
             {
                 ((App.Current.MainWindow.DataContext as MainWindowVM).Pages["Корзина"].DataContext as CartVM).AddToCart(SelectedProduct);
             }
